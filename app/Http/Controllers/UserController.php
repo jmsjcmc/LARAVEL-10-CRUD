@@ -13,11 +13,11 @@ class UserController extends Controller
 {
     public function __construct(public UserService $service)
     {
-        throw new \Exception('Not implemented');
+       
     }
     public function index()
     {
-        return Inertia::render('Users/Index', ['users' => $this->service->getAll()]);
+        return Inertia::render('Dashboard', ['users' => $this->service->getAll()]);
     }
     public function store(StoreUserRequest $request)
     {

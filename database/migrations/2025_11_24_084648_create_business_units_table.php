@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('business_units', function (Blueprint $table) {
+        Schema::create('business_units - 2025_11_24_084648_create_business_units_table.php:14', function (Blueprint $table) {
             $table->id();
-
+            $table->string('name')->unique();
+            $table->dateTime('created_on')->current();
             $table->timestamps();
         });
     }

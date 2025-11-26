@@ -16,6 +16,8 @@ import {
     TableRow,
 } from "../ui/table";
 import { Input } from "@/Components/ui/input";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export interface User {
     id: number;
@@ -27,6 +29,7 @@ interface Props {
     users: User[];
 }
 export default function UserTable({ users }: Props) {
+    const [isOpen, setIsOpen] = useState(false);
     const form = useForm({
         id: null as number | null,
         first_name: "",
@@ -37,6 +40,7 @@ export default function UserTable({ users }: Props) {
     const openCreate = () => {
         form.reset();
         form.setData("id", null);
+        setIsOpen(true);
     };
     const openEdit = (u: User) => {
         form.setData({
@@ -46,22 +50,40 @@ export default function UserTable({ users }: Props) {
             username: u.username,
             password: "",
         });
+        setIsOpen(true);
     };
     const submit = () => {
         if (form.data.id) {
-            form.put(`/users/${form.data.id}`);
+            form.put(`/users/${form.data.id}`,
+                {
+                    onSuccess: () => {
+                        toast.success('User updated!');
+                        setIsOpen(false);
+                    }, onError: () => toast.error('Failed to update user')
+                }
+            );
         } else {
-            form.post("/users");
+            form.post("/users", {
+                onSuccess: () => {
+                    toast.success("User created!");
+                    setIsOpen(false);
+                }, onError: () => toast.error('Failed to create user')
+            });
         }
     };
     const deleteUser = (id: number) => {
-        router.delete(`/users/${id}`);
+        router.delete(`/users/${id}`,
+            {
+                onSuccess: () => toast.success('User deleted!'),
+                onError: () => toast.error('Failed to delete user')
+            }
+        );
     };
     return (
         <div className="p-8">
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold">Users</h1>
-                <Dialog>
+                <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
                         <Button onClick={openCreate}>Add User</Button>
                     </DialogTrigger>

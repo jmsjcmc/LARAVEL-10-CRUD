@@ -57,7 +57,8 @@ export default function UserForm(
             </DialogHeader>
 
             <div className="py-2 space-y-4">
-                <Input
+                <div className="flex gap-4">
+                     <Input
                 placeholder="First Name"
                 value={form.data.first_name}
                 onChange={e => form.setData('first_name', e.target.value)}/>
@@ -65,6 +66,7 @@ export default function UserForm(
                 placeholder="Last Name"
                 value={form.data.last_name}
                 onChange={e => form.setData('last_name', e.target.value)}/>
+                </div>
                 <Input
                 placeholder="Username"
                 value={form.data.username}

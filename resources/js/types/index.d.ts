@@ -8,6 +8,23 @@ export interface User {
 }
 export interface UserTableProps {
     users: User[];
+    filters: {
+        search: string;
+    };
+    pagination: PaginationLink[];
+}
+export interface PaginatedUsers {
+    data: User[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+}
+export interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
 }
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {

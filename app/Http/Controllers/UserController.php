@@ -15,9 +15,18 @@ class UserController extends Controller
     {
 
     }
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('Dashboard', ['users' => $this->service->getAll()]);
+        $search = $request->get('search');
+
+        $users = User::query()->when($search, function ($query) use ($search) {
+             $query->where('first_name', 'like', "%{$search}%")
+          ->orWhere('last_name', 'like', "%{$search}%")
+          ->orWhere('username', 'like', "%{$search}%");
+        })->orderBy('id', 'desc')
+        ->paginate(10)
+        ->withQueryString();
+        return Inertia::render('Dashboard', ['users' => $users, 'filters' => ['search' => $search]]);
     }
     public function store(StoreUserRequest $request)
     {

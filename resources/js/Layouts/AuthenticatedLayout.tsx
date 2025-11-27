@@ -23,7 +23,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Test
+                                    Dashboard
                                 </NavLink>
                             </div>
                         </div>
@@ -37,7 +37,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                             >
-                                                {user.name}
+                                                {user.first_name}
 
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
@@ -101,7 +101,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">
-                                {user.name}
+                                {user.username}
                             </div>
                             <div className="text-sm font-medium text-gray-500">{user.email}</div>
                         </div>

@@ -1,9 +1,9 @@
 import { useForm } from "@inertiajs/react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { useEffect } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 interface UserDialogProps {
     isOpen: boolean;

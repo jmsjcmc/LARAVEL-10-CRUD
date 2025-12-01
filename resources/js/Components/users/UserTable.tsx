@@ -20,6 +20,8 @@ import {
     PaginationItem,
     PaginationLink,
 } from "../ui/pagination";
+import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
+import { DialogContent } from "@radix-ui/react-dialog";
 
 export default function UserTable({
     users,
@@ -30,7 +32,13 @@ export default function UserTable({
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
     const [search, setSearch] = useState(filters.search ?? "");
+    const [deleteID, setDeleteID] = useState<number | null>(null);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
+    const confirmDelete = (id: number) => {
+        setDeleteID(id);
+        setShowDeleteDialog(true);
+    }
     useEffect(() => {
         const timer = setTimeout(() => {
             router.get(
@@ -113,7 +121,7 @@ export default function UserTable({
                                     <Button
                                         size={"sm"}
                                         variant={"destructive"}
-                                        onClick={() => deleteUser(u.id)}
+                                        onClick={() => confirmDelete(u.id)}
                                     >
                                         <Trash className="w-4 h-4 mr-1" />
                                         Delete
@@ -124,6 +132,7 @@ export default function UserTable({
                     </TableBody>
                 </Table>
             </div>
+          
             <div className="sticky bottom-0 py-2 mt-4">
                 <Pagination>
                     <PaginationContent>

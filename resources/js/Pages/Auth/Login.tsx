@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
-import { type } from './../../../../vendor/tightenco/ziggy/src/js/index.d';
+
 
 export default function Login({
     status,

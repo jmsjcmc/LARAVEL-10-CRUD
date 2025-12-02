@@ -2,7 +2,6 @@ import { User, UserTableProps } from "@/types";
 import { router } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
 import UserForm from "../forms/UserForm";
 import {
     Table,
@@ -13,7 +12,6 @@ import {
     TableRow,
 } from "../ui/table";
 import { Pencil, Trash } from "lucide-react";
-import { Input } from "../ui/input";
 import {
     Pagination,
     PaginationContent,
@@ -22,6 +20,8 @@ import {
 } from "../ui/pagination";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 export default function UserTable({
     users,
@@ -132,7 +132,7 @@ export default function UserTable({
                     </TableBody>
                 </Table>
             </div>
-          
+
             <div className="sticky bottom-0 py-2 mt-4">
                 <Pagination>
                     <PaginationContent>
